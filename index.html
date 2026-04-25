@@ -755,92 +755,90 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
 // ================= SPARK CANVAS =================
+<script>
+// ================= SPARK CANVAS =================
 const canvas = document.getElementById("sparkCanvas");
-const ctx = canvas ? canvas.getContext("2d") : null;
+const ctx = canvas.getContext("2d");
 
-if(canvas){
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
+// ================= PARTICLES =================
 let particles = [];
 
-function createSpark(x,y){
-  if(!ctx || !canvas) return;
-
-  const rect = canvas.getBoundingClientRect();
-
-  x = x - rect.left;
-  y = y - rect.top;
-
-  for(let i=0;i<10;i++){
-    particles.push({
-      x:x,
-      y:y,
-      vx:(Math.random()-0.5)*6,
-      vy:(Math.random()-1)*6,
-      life:80
-    });
-  }
+// 🎉 AUTO FALLING SPARK
+function createFallingSpark(){
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: -10,
+    vx: (Math.random() - 0.5) * 1,
+    vy: Math.random() * 2 + 1,
+    size: Math.random() * 3 + 2,
+    life: 200
+  });
 }
 
+// LOOP TAMBAH PARTIKEL
+setInterval(()=>{
+  for(let i=0;i<3;i++){ // jumlah spark tiap frame
+    createFallingSpark();
+  }
+}, 150);
+
+// ================= UPDATE =================
 function update(){
-if(!ctx) return;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
-ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach((p,i)=>{
+    p.x += p.vx;
+    p.y += p.vy;
+    p.life--;
 
-particles.forEach((p,i)=>{
-p.x += p.vx;
-p.y += p.vy;
-p.life--;
+  ctx.fillStyle = "rgba(212,175,55,0.9)";
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
 
-ctx.fillStyle = "rgba(255,182,193,0.8)";
-ctx.beginPath();
-ctx.arc(p.x,p.y,3,0,Math.PI*2);
-ctx.fill();
+    // hapus kalau sudah keluar layar
+    if(p.y > canvas.height || p.life <= 0){
+      particles.splice(i,1);
+    }
+  });
 
-if(p.life <= 0) particles.splice(i,1);
-});
-
-requestAnimationFrame(update);
+  requestAnimationFrame(update);
 }
 update();
 
 
-// ================= CLICK SPARK =================
+// ================= BONUS: CLICK EFFECT =================
+function createClickSpark(x,y){
+setInterval(..., 200);
+    particles.push({
+      x:x,
+      y:y,
+      vx:(Math.random()-0.5)*5,
+      vy:(Math.random()-1)*5,
+      size:2,
+      life:60
+    });
+  }
+}
+
+// klik desktop
 document.addEventListener("click",(e)=>{
-createSpark(e.clientX, e.clientY);
+  createClickSpark(e.clientX, e.clientY);
 });
 
-
-// ================= SHAKE (MOBILE ONLY) =================
-let lastX=0,lastY=0,lastZ=0;
-let lastTime=0;
-
-window.addEventListener("devicemotion",(event)=>{
-let acc = event.accelerationIncludingGravity;
-if(!acc) return;
-
-let now = Date.now();
-
-if(now - lastTime > 150){
-
-let diff =
-Math.abs(acc.x-lastX) +
-Math.abs(acc.y-lastY) +
-Math.abs(acc.z-lastZ);
-
-if(diff > 25){
-createSpark(Math.random()*window.innerWidth, 0);
-lastTime = now;
-}
-
-lastX = acc.x;
-lastY = acc.y;
-lastZ = acc.z;
-}
-
+// touch HP
+document.addEventListener("touchstart",(e)=>{
+  const t = e.touches[0];
+  createClickSpark(t.clientX, t.clientY);
 });
+</script>
 
 
 </script>
@@ -904,11 +902,13 @@ if(canvas){
       .catch(console.error);
   }
 }
-</script>
 
 <canvas id="sparkCanvas"></canvas>
 
-<div id="undangan" style="display:none;"></div>
+<div id="undangan" style="display:none;"></div>    
+    
+</script>
+
     
 </body>
 
