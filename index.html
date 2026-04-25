@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation Elegant</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= ANIMASI FADE IN ================= */
+.fade-in{
+opacity:0;
+transform:translateY(30px);
+transition:all 0.8s ease;
+}
+
+.fade-in.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* ================= BASE ================= */
+body{
+margin:0;
+font-family:'Poppins', sans-serif;
+background:linear-gradient(135deg,#fffaf7 0%, #f7fbf8 60%, #ffffff 100%);
+color:#5a5a5a;
+}
+
+/* ================= HERO ================= */
+.hero{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+position:relative;
+background:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e') center/cover no-repeat;
+}
+
+.hero::after{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(255,255,255,0.72);
+}
+
+.card{
+position:relative;
+z-index:2;
+background:rgba(255,255,255,0.9);
+padding:30px;
+border-radius:24px;
+max-width:520px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+h1{
+font-family:'Playfair Display';
+color:#c9a86a;
+font-size:40px;
+}
+
+/*=== animasi shake === */
+.spark{
+position:fixed;
+top:-20px;
+font-size:18px;
+animation:fallSpark 1.8s linear forwards;
+pointer-events:none;
+z-index:9999;
+opacity:0.9;
+}
+
+#sparkCanvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:9999;
+}
+
+@keyframes fallSpark{
+to{
+transform:translateY(110vh);
+opacity:0;
+}
+}
+
+
+/* ================= COUNTDOWN ================= */
+.countdown{
+display:flex;
+gap:8px;
+justify-content:center;
+margin-top:15px;
+flex-wrap:wrap;
+}
+
+.box{
+background:#fff;
+padding:10px;
+border-radius:12px;
+min-width:60px;
+border:1px solid #e8d9b5;
+}
+
+.section{
+padding:70px 20px;
+max-width:900px;
+margin:auto;
+position:relative;
+background:rgba(255,255,255,0.75);
+margin-top:30px;
+border-radius:25px;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+overflow:hidden;
+}
+
+/* 🌿 FRAME LIUK (SVG VINE STYLE) */
+.section::before,
+.section::after{
+content:"";
+position:absolute;
+width:200px;
+height:200px;
+background-repeat:no-repeat;
+background-size:contain;
+opacity:0.6;
+pointer-events:none;
+}
+
+/* kiri atas */
+.section::before{
+top:-40px;
+left:-40px;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M20 180 C40 120, 80 120, 100 80 C120 40, 160 40, 180 20' stroke='%23c9a86a' stroke-width='3' fill='none'/%3E%3Ccircle cx='40' cy='140' r='4' fill='%23e8d9b5'/%3E%3Ccircle cx='90' cy='90' r='4' fill='%23e8d9b5'/%3E%3Ccircle cx='140' cy='50' r='4' fill='%23e8d9b5'/%3E%3C/svg%3E");
+}
+
+/* kanan bawah */
+.section::after{
+bottom:-40px;
+right:-40px;
+transform:rotate(180deg);
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M20 180 C40 120, 80 120, 100 80 C120 40, 160 40, 180 20' stroke='%23c9a86a' stroke-width='3' fill='none'/%3E%3Ccircle cx='40' cy='140' r='4' fill='%23e8d9b5'/%3E%3Ccircle cx='90' cy='90' r='4' fill='%23e8d9b5'/%3E%3Ccircle cx='140' cy='50' r='4' fill='%23e8d9b5'/%3E%3C/svg%3E");
+}
+
+/* ================= TITLE ================= */
+.title{
+text-align:center;
+font-family:'Playfair Display';
+font-size:28px;
+color:#c9a86a;
+margin-bottom:25px;
+}
+
+/* ================= GRID ================= */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:16px;
+}
+
+/* ================= CARD ================= */
+.fcard{
+background:#fff;
+padding:18px;
+border-radius:16px;
+border:1px solid #eadfca;
+text-align:center;
+}
+
+/* ================= PROFILE ================= */
+.profile-wrapper{
+position:relative;
+margin-top:60px; /* ruang untuk foto floating */
+}
+
+.profile-card{
+background:rgba(255,255,255,0.78);
+backdrop-filter:blur(12px);
+border-radius:20px;
+padding:70px 20px 25px;
+text-align:center;
+border:1px solid rgba(210,190,160,0.25);
+box-shadow:0 10px 25px rgba(0,0,0,0.06);
+position:relative;
+overflow:visible;
+}
+
+.profile-img{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid white;
+box-shadow:0 10px 20px rgba(0,0,0,0.15);
+
+/* floating CANVA style */
+position:absolute;
+top:-60px;
+left:50%;
+transform:translateX(-50%);
+}
+
+.profile-divider{
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.profile-divider img{
+width:90px;
+opacity:0.7;
+animation:floatFlower 4s ease-in-out infinite;
+filter:drop-shadow(0 8px 12px rgba(0,0,0,0.08));
+}
+
+
+/* ================= BUTTON ================= */
+.btn{
+padding:10px 14px;
+background:linear-gradient(135deg,#f5e6c8,#e8d9b5);
+border:none;
+border-radius:12px;
+cursor:pointer;
+margin-top:10px;
+}
+
+/* ================= INPUT ================= */
+input{
+width:100%;
+padding:10px;
+border-radius:10px;
+border:1px solid #ddd;
+margin-top:10px;
+}
+
+.corner-flower{
+position:fixed;
+width:160px;
+opacity:0.45;
+pointer-events:none;
+z-index:1;
+}
+
+/* POJOK TIDAK BOLEH OVERFLOW */
+.tl{top:0;left:0;}
+.tr{top:0;right:0;transform:rotate(90deg);}
+.bl{bottom:0;left:0;transform:rotate(-90deg);}
+.br{bottom:0;right:0;transform:rotate(180deg);}
+
+.gallery-img{
+width:100%;
+height:230px;
+object-fit:cover;
+border-radius:18px;
+border:1px solid rgba(210,190,160,0.25);
+box-shadow:0 10px 22px rgba(0,0,0,0.06);
+transition:0.3s ease;
+}
+
+.gallery-img:hover{
+transform:scale(1.04);
+}
+
+/* ================= LOVE STORY TIMELINE CANVA STYLE ================= */
+.love-timeline{
+position:relative;
+margin-top:20px;
+padding-left:30px;
+border-left:2px dashed #e8d9b5;
+}
+
+.love-item{
+position:relative;
+margin-bottom:25px;
+}
+
+.love-item .dot{
+position:absolute;
+left:-38px;
+top:6px;
+width:14px;
+height:14px;
+background:#c9a86a;
+border-radius:50%;
+box-shadow:0 0 0 4px rgba(201,168,106,0.2);
+}
+
+.love-item .content{
+background:rgba(255,255,255,0.8);
+padding:15px 18px;
+border-radius:14px;
+border:1px solid rgba(210,190,160,0.25);
+backdrop-filter:blur(8px);
+}
+
+.love-item h4{
+margin:0 0 5px;
+color:#c9a86a;
+font-family:'Playfair Display';
+font-size:18px;
+}
+
+.love-item p{
+margin:0;
+font-size:14px;
+line-height:1.6;
+color:#666;
+}
+
+.music-btn{
+position:fixed;
+bottom:20px;
+right:20px;
+z-index:9999;
+width:50px;
+height:50px;
+border:none;
+border-radius:50%;
+background:#c9a86a;
+color:white;
+cursor:pointer;
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+font-size:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:0.3s ease;
+}
+
+.music-btn:hover{
+transform:scale(1.1);
+}
+
+/* animasi saat aktif */
+.music-btn.playing{
+background:#4caf50;
+}
+
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.55);
+backdrop-filter:blur(6px);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+}
+
+.overlay-card{
+background:rgba(255,255,255,0.92);
+padding:30px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 15px 40px rgba(0,0,0,0.2);
+max-width:320px;
+animation:pop 0.6s ease;
+}
+
+@keyframes pop{
+from{transform:scale(0.8);opacity:0}
+to{transform:scale(1);opacity:1}
+}
+
+.open-btn{
+margin-top:15px;
+padding:10px 16px;
+border:none;
+border-radius:12px;
+background:#c9a86a;
+color:white;
+cursor:pointer;
+font-weight:500;
+}
+
+.overlay input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #ddd;
+text-align:center;
+}
+
+iframe{
+    width:100%;
+  border:0;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+</style>
+</head>
+
+<body>
+
+<div id="undangan" style="display:none;"></div>
+
+<div id="overlay" class="overlay">
+
+  <div class="overlay-card">
+    <p>💍 Wedding Invitation</p>
+    <h2>Rizky & Aulia</h2>
+
+    <input id="inputNama" placeholder="Masukkan nama Anda">
+
+    <button class="open-btn" onclick="openInvitation()">
+      Buka Undangan
+    </button>
+
+  </div>
+
+</div>
+<!-- HERO -->
+<div class="hero">
+<div class="card">
+<div id="guestName">💌 Kepada Yth, Tamu Undangan</div>
+<p>💍 Wedding Invitation</p>
+<h1>Rizky & Aulia</h1>
+<p>"Menuju cinta yang diridhoi Allah"</p>
+
+<div class="countdown">
+<div class="box"><h3 id="d">0</h3><small>Hari</small></div>
+<div class="box"><h3 id="h">0</h3><small>Jam</small></div>
+<div class="box"><h3 id="m">0</h3><small>Menit</small></div>
+<div class="box"><h3 id="s">0</h3><small>Detik</small></div>
+</div>
+
+</div>
+</div>
+
+
+<!-- ================= EVENT DATE ================= -->
+<div class="section">
+
+<h2 class="title">📅 Detail Acara</h2>
+
+<div class="grid">
+
+<div class="fcard">
+<h3>💍 Akad Nikah</h3>
+<p id="akadText"></p>
+</div>
+
+<div class="fcard">
+<h3>🎉 Resepsi</h3>
+<p id="resepsiText"></p>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- PROFILE -->
+<div class="section">
+<h2 class="title">💑 Profil Mempelai</h2>
+
+<div class="grid">
+
+<!-- MEMPELAI PRIA -->
+<div class="profile-wrapper">
+  <div class="profile-card">
+
+   <img class="profile-img" src= "assets/gallery/lk.png" alt="mempelailk">
+    <h3>Rizky</h3>
+    <p>Putra dari Bapak Ahmad & Ibu Sari</p>
+
+  </div>
+</div>
+
+<div class="profile-divider">
+  <img src="assets/frame/bungatengah.png" alt="flower">
+</div>
+
+<!-- MEMPELAI WANITA -->
+<div class="profile-wrapper">
+  <div class="profile-card">
+
+    <img class="profile-img" src= "assets/gallery/pr.png" alt="mempelaiwanita">
+
+    <h3>Aulia</h3>
+    <p>Putri dari Bapak Hendra & Ibu Lina</p>
+
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ================= LOVE STORY ================= -->
+<div class="section">
+<h2 class="title">❤️ Love Story</h2>
+
+<div class="love-timeline">
+
+<div class="love-item">
+<div class="dot"></div>
+<div class="content">
+<h4>2022</h4>
+<p>Pertama kali bertemu di sebuah lingkungan yang sederhana, tanpa menyangka akan menjadi awal cerita panjang.</p>
+</div>
+</div>
+
+<div class="love-item">
+<div class="dot"></div>
+<div class="content">
+<h4>2023</h4>
+<p>Mulai saling mengenal lebih dekat, berbagi cerita, dan tumbuh rasa yang tidak terduga.</p>
+</div>
+</div>
+
+<div class="love-item">
+<div class="dot"></div>
+<div class="content">
+<h4>2024</h4>
+<p>Memutuskan untuk bersama dan saling menjaga satu sama lain dalam perjalanan yang lebih serius.</p>
+</div>
+</div>
+
+<div class="love-item">
+<div class="dot"></div>
+<div class="content">
+<h4>2026</h4>
+<p>Akhir dari penantian panjang — menjadi awal perjalanan baru sebagai pasangan suami istri 💍</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ================= GOOGLE MAPS ================= -->
+<div class="section">
+  <h2 class="title">📍 Lokasi Acara</h2>
+
+  <div class="fcard">
+
+    <p>Silakan lihat lokasi acara di peta berikut:</p>
+
+<iframe 
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15083.537061311868!2d112.56026855!3d-7.42784275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7809a592b169ef%3A0x8be85d6f61c1fa9a!2sEYP%20Gudang%20Lemon%20California%20Balongbendo!5e1!3m2!1sid!2sid!4v1777083742597!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+  width="100%" 
+  height="300" 
+  style="border:0; border-radius:12px;"
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+    <a 
+      href="https://maps.app.goo.gl/UwLRWxfxZW2DPW7m9"
+      target="_blank"
+      class="btn"
+      style="display:inline-block; margin-top:10px;">
+      📌 Buka di Google Maps
+    </a>
+
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="section">
+<h2 class="title">📸 Gallery</h2>
+
+<div class="grid">
+
+<img src="assets/gallery/1.png" class="gallery-img">
+<img src="assets/gallery/2.png" class="gallery-img">
+<img src="assets/gallery/3.png" class="gallery-img">
+<img src="assets/gallery/4.png" class="gallery-img">
+
+</div>
+</div>
+
+<!-- RSVP -->
+<div class="section">
+<h2 class="title">📩 RSVP</h2>
+
+<div class="fcard">
+<button class="btn" onclick="rsvp()">Saya Hadir</button>
+<p>Jumlah Hadir: <span id="rsvp">0</span></p>
+</div>
+</div>
+
+<!-- UCAPAN -->
+<div class="section">
+<h2 class="title">💌 Ucapan</h2>
+
+<div class="fcard">
+<input id="inputUcapan" placeholder="Tulis ucapan...">
+<button class="btn" onclick="tambahUcapan()">Kirim</button>
+</div>
+
+<div id="ucapanContainer" class="grid"></div>
+</div>
+
+<!-- ================= MUSIC ================= -->
+<audio id="bgm" loop>
+<source src="assets/music/cinta terakhir - ari lasso.mp3" type="audio/mpeg">
+</audio>
+
+<button onclick="toggleMusic()" class="music-btn" id="musicBtn">🎵</button>
+
+
+
+<script>
+
+window.onerror = function(msg){
+  console.log("ERROR:", msg);
+};
+
+// ================= EVENT DATE =================
+const akadDate = new Date("2026-12-25T08:00:00");
+const resepsiDate = new Date("2026-12-25T11:00:00");
+
+// format tanggal indonesia
+function formatDate(date){
+return date.toLocaleDateString("id-ID",{
+weekday:"long",
+year:"numeric",
+month:"long",
+day:"numeric"
+});
+}
+
+// SAFE DOM (biar tidak error kalau belum ada)
+const akadText = document.getElementById("akadText");
+const resepsiText = document.getElementById("resepsiText");
+
+if(akadText){
+akadText.innerText = formatDate(akadDate) + " - 08:00 WIB";
+}
+
+if(resepsiText){
+resepsiText.innerText = formatDate(resepsiDate) + " - 11:00 WIB";
+}
+
+
+// ================= COUNTDOWN =================
+let target = akadDate.getTime();
+
+setInterval(()=>{
+let now = new Date().getTime();
+let diff = target - now;
+
+if(diff < 0) diff = 0;
+
+document.getElementById("d") && (document.getElementById("d").innerText =
+Math.floor(diff/(1000*60*60*24)));
+
+document.getElementById("h") && (document.getElementById("h").innerText =
+Math.floor((diff%(1000*60*60*24))/(1000*60*60)));
+
+document.getElementById("m") && (document.getElementById("m").innerText =
+Math.floor((diff%(1000*60*60))/(1000*60)));
+
+document.getElementById("s") && (document.getElementById("s").innerText =
+Math.floor((diff%(1000*60))/1000));
+
+},1000);
+
+
+// ================= RSVP =================
+let rsvpCount = localStorage.getItem("rsvp") || 0;
+
+const rsvpEl = document.getElementById("rsvp");
+if(rsvpEl) rsvpEl.innerText = rsvpCount;
+
+function rsvp(){
+rsvpCount++;
+localStorage.setItem("rsvp", rsvpCount);
+if(rsvpEl) rsvpEl.innerText = rsvpCount;
+}
+
+
+// ================= UCAPAN =================
+let ucapan = JSON.parse(localStorage.getItem("ucapan")) || [];
+
+function render(){
+let c = document.getElementById("ucapanContainer");
+if(!c) return;
+
+c.innerHTML = "";
+
+ucapan.forEach(u=>{
+let div = document.createElement("div");
+div.className = "fcard";
+div.innerText = "💌 " + u;
+c.appendChild(div);
+});
+}
+
+function tambahUcapan(){
+let i = document.getElementById("inputUcapan");
+if(!i || i.value.trim() == "") return;
+
+ucapan.push(i.value);
+localStorage.setItem("ucapan", JSON.stringify(ucapan));
+
+i.value = "";
+render();
+}
+
+render();
+
+
+// ================= MUSIC =================
+let isPlaying = false;
+
+function getMusic(){
+  return document.getElementById("bgm");
+}
+
+function getBtn(){
+  return document.getElementById("musicBtn");
+}
+
+function syncUI(){
+  const music = getMusic();
+  const btn = getBtn();
+
+  if(!music || !btn) return;
+
+  if(music.paused){
+    btn.innerHTML = "🎵";
+    btn.classList.remove("playing");
+  }else{
+    btn.innerHTML = "⏸️";
+    btn.classList.add("playing");
+  }
+}
+
+function toggleMusic(){
+  const music = getMusic();
+  if(!music) return;
+
+  if(music.paused){
+    music.play().then(syncUI).catch(()=>{});
+  }else{
+    music.pause();
+    syncUI();
+  }
+}
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  syncUI();
+});
+
+
+// ================= SPARK CANVAS =================
+const canvas = document.getElementById("sparkCanvas");
+const ctx = canvas ? canvas.getContext("2d") : null;
+
+if(canvas){
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+}
+
+let particles = [];
+
+function createSpark(x,y){
+  if(!ctx || !canvas) return;
+
+  const rect = canvas.getBoundingClientRect();
+
+  x = x - rect.left;
+  y = y - rect.top;
+
+  for(let i=0;i<10;i++){
+    particles.push({
+      x:x,
+      y:y,
+      vx:(Math.random()-0.5)*6,
+      vy:(Math.random()-1)*6,
+      life:80
+    });
+  }
+}
+
+function update(){
+if(!ctx) return;
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach((p,i)=>{
+p.x += p.vx;
+p.y += p.vy;
+p.life--;
+
+ctx.fillStyle = "rgba(255,182,193,0.8)";
+ctx.beginPath();
+ctx.arc(p.x,p.y,3,0,Math.PI*2);
+ctx.fill();
+
+if(p.life <= 0) particles.splice(i,1);
+});
+
+requestAnimationFrame(update);
+}
+update();
+
+
+// ================= CLICK SPARK =================
+document.addEventListener("click",(e)=>{
+createSpark(e.clientX, e.clientY);
+});
+
+
+// ================= SHAKE (MOBILE ONLY) =================
+let lastX=0,lastY=0,lastZ=0;
+let lastTime=0;
+
+window.addEventListener("devicemotion",(event)=>{
+let acc = event.accelerationIncludingGravity;
+if(!acc) return;
+
+let now = Date.now();
+
+if(now - lastTime > 150){
+
+let diff =
+Math.abs(acc.x-lastX) +
+Math.abs(acc.y-lastY) +
+Math.abs(acc.z-lastZ);
+
+if(diff > 25){
+createSpark(Math.random()*window.innerWidth, 0);
+lastTime = now;
+}
+
+lastX = acc.x;
+lastY = acc.y;
+lastZ = acc.z;
+}
+
+});
+
+
+</script>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const nama = params.get("to");
+
+if(nama){
+  document.getElementById("guestName").innerHTML =
+    "💌 Kepada Yth: <b>" + nama + "</b>";
+}
+
+function openInvitation(){ 
+
+  const input = document.getElementById("inputNama");
+  const nama = input.value.trim();
+
+  if(nama === ""){
+    alert("Isi nama dulu ya 😊");
+    return;
+  }
+
+  document.getElementById("guestName").innerHTML =
+    "💌 Kepada Yth: <b>" + nama + "</b>";
+
+  // tutup overlay
+  document.getElementById("overlay").style.display = "none";
+
+  // JANGAN pakai undangan element
+  // cukup biarkan body tetap tampil (karena memang udah satu halaman)
+
+  // autoplay music
+  const music = document.getElementById("bgm");
+  if(music){
+    music.play().catch(()=>{});
+  }
+}
+
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+if(canvas){
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+}
+
+</script>
+
+
+</body>
+
+<!-- SIDE FRAME (KANAN KIRI) -->
+<div class="side-frame side-left"></div>
+<div class="side-frame side-right"></div>
+
+<!-- CORNER FLOWER (POJOK UNDANGAN) -->
+<img class="corner-flower tl" src="https://pngimg.com/uploads/flower/flower_PNG102.png">
+<img class="corner-flower tr" src="https://pngimg.com/uploads/flower/flower_PNG102.png">
+<img class="corner-flower bl" src="https://pngimg.com/uploads/flower/flower_PNG102.png">
+<img class="corner-flower br" src="https://pngimg.com/uploads/flower/flower_PNG102.png">
+
+
+</html>
