@@ -609,7 +609,10 @@ iframe{
 <button onclick="toggleMusic()" class="music-btn" id="musicBtn">🎵</button>
 
 
+<canvas id="sparkCanvas"></canvas>
 
+<div id="undangan" style="display:none;"></div>    
+    
 <script>
 
 window.onerror = function(msg){
@@ -755,8 +758,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
 // ================= SPARK CANVAS =================
-<script>
-// ================= SPARK CANVAS =================
 const canvas = document.getElementById("sparkCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -816,7 +817,7 @@ update();
 
 // ================= BONUS: CLICK EFFECT =================
 function createClickSpark(x,y){
-setInterval(..., 200);
+  for(let i=0;i<8;i++){
     particles.push({
       x:x,
       y:y,
@@ -838,12 +839,8 @@ document.addEventListener("touchstart",(e)=>{
   const t = e.touches[0];
   createClickSpark(t.clientX, t.clientY);
 });
-</script>
 
 
-</script>
-
-<script>
 const params = new URLSearchParams(window.location.search);
 const nama = params.get("to");
 
@@ -902,13 +899,9 @@ if(canvas){
   }
 }
 
-<canvas id="sparkCanvas"></canvas>
-
-<div id="undangan" style="display:none;"></div>    
     
 </script>
-
-    
+  
 </body>
 
 <!-- SIDE FRAME (KANAN KIRI) -->
