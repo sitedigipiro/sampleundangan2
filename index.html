@@ -855,6 +855,7 @@ if(nama){
 }
 
 function openInvitation(){ 
+    requestSensor();
 
   const input = document.getElementById("inputNama");
   const nama = input.value.trim();
@@ -890,9 +891,25 @@ if(canvas){
   window.addEventListener("resize", resizeCanvas);
 }
 
+ function requestSensor(){
+  if (typeof DeviceMotionEvent !== 'undefined' && 
+      typeof DeviceMotionEvent.requestPermission === 'function') {
+    
+    DeviceMotionEvent.requestPermission()
+      .then(response => {
+        if (response === 'granted') {
+          console.log("Sensor aktif");
+        }
+      })
+      .catch(console.error);
+  }
+}
 </script>
 
+<canvas id="sparkCanvas"></canvas>
 
+<div id="undangan" style="display:none;"></div>
+    
 </body>
 
 <!-- SIDE FRAME (KANAN KIRI) -->
